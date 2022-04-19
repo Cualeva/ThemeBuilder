@@ -4,7 +4,8 @@
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
-        "build": "ng build --prod --baseHref=https://devexpress.github.io/ThemeBuilder/ && node ./copyfile.js",
+        "build": "ng build --watch --prod --baseHref=/ && node ./copyfile.js",
+        "dist": "ng build --prod --baseHref=/ && node ./copyfile.js",
         "lint-fix": "eslint --fix \"src/**/*.ts\"",
         "lint": "eslint \"src/**/*.ts\"",
         "test": "npm run lint && npm run build"
@@ -13,6 +14,7 @@
     "dependencies": {
         "@angular-devkit/schematics": "^8.3.26",
         "@angular/animations": "^9.1.9",
+        "@angular/cli": "^9.1.7",
         "@angular/common": "^9.1.9",
         "@angular/compiler": "^9.1.9",
         "@angular/core": "^9.1.9",
@@ -36,7 +38,6 @@
         "@angular-builders/custom-webpack": "^9.1.0",
         "@angular-devkit/build-angular": "~0.13.5",
         "@angular-devkit/core": "^9.1.7",
-        "@angular/cli": "^9.1.7",
         "@angular/compiler-cli": "^9.1.9",
         "@angular/language-service": "^9.1.9",
         "@babel/core": "^7.3.4",

@@ -6,6 +6,7 @@ import * as JSZip from 'jszip';
 import * as JSZipUtils from 'jszip-utils';
 import { GoogleAnalyticsEventsService } from '../../../google-analytics-events.service';
 import { ImportService } from '../../../import.service';
+import { LoadingService } from '../../../loading.service';
 import { PopupComponent } from '../popup/popup.component';
 import { DxTreeViewComponent, DxScrollViewComponent } from 'devextreme-angular';
 
@@ -71,6 +72,7 @@ export class ExportPopupComponent implements OnInit {
 
     constructor(
         private importService: ImportService,
+        private loadingService: LoadingService,
         private googleAnalyticsEventsService: GoogleAnalyticsEventsService
     ) {}
 
@@ -203,10 +205,6 @@ export class ExportPopupComponent implements OnInit {
     }
 
     exportCss(save: boolean): Promise<void> {
-        this.googleAnalyticsEventsService.emitEvent(
-            'export',
-            'save css (' + this.importService.getThemeName() + ')');
-
         this.contentReady = false;
         return this.importService.exportCss(this.schemeName, this.makeSwatch, this.getSelectedWidgets(), this.removeExternalResources)
             .then((css) => {
@@ -216,19 +214,39 @@ export class ExportPopupComponent implements OnInit {
             })
             .catch((e) => {
                 this.contentReady = true;
-                console.log('Css export fails', e);
+                console.error('Css export fails', e);
             });
     }
 
     exportMeta(save: boolean): void {
-        this.googleAnalyticsEventsService.emitEvent(
-            'export',
-            'save metadata (' + this.importService.getThemeName() + ')');
-
         // eslint-disable-next-line @typescript-eslint/no-floating-promises
         this.importService.exportMetadata(this.schemeName, this.makeSwatch, this.getSelectedWidgets(), this.removeExternalResources).then((metaString) => {
             this.textContent = metaString;
             if(save) fileSaver._saveBlobAs(this.getFileNameWithoutExt() + '.json', 'JSON', new Blob([metaString]));
+        });
+    }
+
+    save(): void {
+        var jsonMetaData = null;
+        var cssContent = null;
+        this.loadingService.show();
+        this.importService.exportMetadata(this.schemeName, this.makeSwatch, this.getSelectedWidgets(), this.removeExternalResources).then((metaString) => {
+            jsonMetaData = metaString;
+            //if (save) fileSaver._saveBlobAs(this.getFileNameWithoutExt() + '.json', 'JSON', new Blob([metaString]));
+            return this.importService.exportCss(this.schemeName, this.makeSwatch, this.getSelectedWidgets(), this.removeExternalResources)
+                .then((css) => {
+                    this.contentReady = true;
+                    cssContent = css;
+                })
+                .catch((e) => {
+                    this.contentReady = true;
+                    console.error('Css export fails', e);
+                });
+        }).then(() => {
+            parent.postMessage({ type: "save", jsonMetaData: jsonMetaData, cssContent: cssContent }, "*");
+            this.loadingService.hide();
+        }).catch(function (jqXhr) {
+            this.loadingService.hide();
         });
     }
 
@@ -267,15 +285,9 @@ export class ExportPopupComponent implements OnInit {
             this.exportCss(false)
                 .then(() => this.copyAreaActive = true)
                 .catch((e) => {
-                    console.log(e);
+                    console.error(e);
                 });
         }
-    }
-
-    copyFileContent(): void {
-        this.googleAnalyticsEventsService.emitEvent(
-            'export',
-            'copy ' + (this.needMeta ? 'metadata' : 'css') + ' (' + this.importService.getThemeName() + ')');
     }
 
     ngOnInit(): void {

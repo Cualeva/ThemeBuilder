@@ -4,17 +4,32 @@ import { BuilderResult } from './types/builder-result';
 import { BuilderConfig } from './types/builder-config';
 import { Theme } from './types/theme';
 import { Metadata } from './types/metadata';
+import { GlobalVariable } from './global';
 
 @Injectable()
 export class ThemeBuilderService {
-    private url = 'https://js.devexpress.com/api/themebuilder';
+    private metadata = null;
+    private runningPromise = null;
 
     constructor(private http: HttpClient) {}
 
     private build(theme: Theme, config: BuilderConfig): Promise<BuilderResult> {
         config.baseTheme = theme.name + '.' + theme.colorScheme.replace(/-/g, '.');
-
-        const postBuilder: Promise<any> = this.http.post(`${this.url}/buildtheme`, config).toPromise();
+        if (GlobalVariable.buildCount > 1) {
+            GlobalVariable.isDefaultTheme = false;
+        }
+        GlobalVariable.buildCount++;
+        var postBuilder: Promise<any> = this.http.post(`${GlobalVariable.backEndUrl}/ThemeBuilder/BuildTheme`, {
+            version: GlobalVariable.version,
+            config: JSON.stringify(config)
+        }).toPromise();
+        postBuilder = postBuilder.then(function (result) {
+            if (result.Error == true) {
+                console.error(result.ErrorDescription);
+                throw new Error(result.ErrorDescription);
+            }
+            return result.Data;
+        });
         return postBuilder;
     }
 
@@ -22,17 +37,21 @@ export class ThemeBuilderService {
         return this.build(theme, config);
     }
 
-    buildThemeBootstrap(theme: Theme, bootstrapVariables: string, bootstrapVersion: number): Promise<BuilderResult> {
-        const LESS_BOOTSTRAP_VERSION = 3;
-        return this.build(theme, {
-            data: bootstrapVariables,
-            inputFile: bootstrapVersion === LESS_BOOTSTRAP_VERSION ? '.less' : '.scss',
-            bootstrapVersion
-        });
-    }
-
     getMetadata(): Promise<Metadata> {
-        const promise = this.http.get(`${this.url}/metadata`).toPromise() as Promise<Metadata>;
-        return promise;
+        var self = this;
+        if (this.metadata != null) {
+            return Promise.resolve(this.metadata);
+        }
+        if (this.runningPromise != null) {
+            return this.runningPromise;
+        }
+        this.runningPromise = this.http.get(`${GlobalVariable.devExpressUrl}/metadata`).toPromise() as Promise<Metadata>;
+        this.runningPromise.then(function (metadata) {
+            self.metadata = metadata;
+            return metadata;
+        }).finally(jqXhr =>
+            this.runningPromise = null
+        );
+        return this.runningPromise;
     }
 }

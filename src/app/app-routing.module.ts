@@ -18,7 +18,7 @@ const routes: Routes = [
         path: '',
         component: AppLayoutComponent,
         children: [
-            { path: '', component: IndexComponent, data: { routeId: RouteId.MAIN_INDEX, docHash: '' } },
+            { path: '', redirectTo: '/advanced/generic/light/base.common/', pathMatch: 'full' },
             { path: 'master', component: IndexComponent, data: { routeId: RouteId.NESTED_INDEX, docHash: '#Get_Started/Create_a_New_Theme' } },
             { path: 'import', component: IndexComponent, data: { routeId: RouteId.NESTED_INDEX, docHash: '#Get_Started/Import_an_Existing_Theme' } },
             { path: 'import/bootstrap', component: ImportBootstrapComponent, data: { routeId: RouteId.IMPORT_OR_MASTER, docHash: '#Get_Started/Import_an_Existing_Theme' } },

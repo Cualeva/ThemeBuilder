@@ -4,6 +4,7 @@ import DataSource from 'devextreme/data/data_source';
 import { confirm } from 'devextreme/ui/dialog';
 import { Subscription } from 'rxjs';
 import { MetadataRepositoryService } from '../../meta-repository.service';
+import { GlobalVariable } from '../../global';
 
 @Component({
     selector: 'app-header',
@@ -16,7 +17,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     subscription: Subscription;
     currentThemeId: number;
 
-    constructor(private metadataService: MetadataRepositoryService, private route: Router) {}
+    constructor(private metadataService: MetadataRepositoryService, private route: Router) { }
 
     themeChanged(e): void {
         if(e.component.canceled) {
@@ -29,19 +30,38 @@ export class HeaderComponent implements OnInit, OnDestroy {
             const newTheme = themes.filter((i) => i.themeId === e.value);
 
             // eslint-disable-next-line @typescript-eslint/no-floating-promises
-            confirm('Are you sure you want to change the base theme? All changes will be lost.', 'ThemeBuilder').then((confirmed) => {
+            if (GlobalVariable.isDefaultTheme === true)
+                var promise = Promise.resolve(true);
+            else
+                var promise = confirm('Are you sure you want to change the base theme? All changes will be lost.', 'ThemeBuilder');
+                //var promise = confirm(GlobalVariable.translations["dm-changeBaseThemeConfirmQuestion"] || 'Are you sure you want to change the base theme? All changes will be lost.', 'ThemeBuilder');
+            promise.then((confirmed) => {
                 if(confirmed && newTheme.length) {
                     const theme = newTheme[0].name;
                     const colorScheme = newTheme[0].colorScheme;
                     const urlParts = this.route.url.split('/');
                     const routeWidgetPosition = 4;
                     const widget = urlParts[routeWidgetPosition];
+                    // compact has -compact following the colorScheme
                     this.route.navigate(['advanced', theme, colorScheme, widget]);
                 } else {
                     this.currentThemeId = e.previousValue;
                     e.component.canceled = true;
                 }
             });
+        });
+    }
+
+    resetTheme(): void {
+        if (GlobalVariable.isDefaultTheme === true)
+            var promise = Promise.resolve(true);
+        else
+            var promise = confirm('Are you sure you want to change the base theme? All changes will be lost.', 'ThemeBuilder');
+            //var promise = confirm(GlobalVariable.translations["dm-changeBaseThemeConfirmQuestion"] || 'Are you sure you want to change the base theme? All changes will be lost.', 'ThemeBuilder');
+        promise.then(function (choice) {
+            if (choice) {
+                parent.postMessage({ type: 'resetTheme', data: null }, '*');
+            }
         });
     }
 

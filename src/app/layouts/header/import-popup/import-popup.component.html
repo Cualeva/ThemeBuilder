@@ -3,53 +3,27 @@
     height="auto"
     #popup
 >
-    <dx-tab-panel class="tabs">
-        <dxi-item title="DevExtreme Metadata">
-            <div class="text first-tab">
-                Upload a .json file with DevExtreme metadata
-            </div>
-            <app-bootstrap-uploader
-                accept=".json"
-                buttonText="Upload File"
-                labelText=""
-                height="65"
-                (imported)="imported()"
-            ></app-bootstrap-uploader>
-            <div class="text">
-                or paste metadata in the area below.
-            </div>
-            <dx-text-area
-                #textArea
-                valueChangeEvent="keyup"
-                class="text-area"
-                [(value)]="importValue"
-                [height]="100"
-                placeholder="Paste metadata here"
-            >
-            </dx-text-area>
-            <app-button [disabled]="importValue.trim() === ''" (clicked)="applyClick(textArea)">Upload Metadata</app-button>
-        </dxi-item>
-        <dxi-item title="Bootstrap Variables">
-            <div class="text">
-                Upload a Bootstrap theme file to apply its colors to a base DevExtreme theme.
-                Choose the "variables.less" file for Bootstrap 3 and the "_variables.scss" file for Bootstrap 4.
-            </div>
-
-            <dx-radio-group
-                [dataSource]="radioGroupData"
-                displayExpr="text"
-                valueExpr="value"
-                layout="horizontal"
-                [(value)]="selectedIndex"
-                class="radio-group"
-            ></dx-radio-group>
-
-            <app-bootstrap-uploader
-                [accept]="radioGroupData[selectedIndex].acceptFormat"
-                [buttonText]="radioGroupData[selectedIndex].uploadButtonText"
-                [version]="radioGroupData[selectedIndex].version"
-                (imported)="imported()"
-            ></app-bootstrap-uploader>
-        </dxi-item>
-    </dx-tab-panel>
+    <div class="text first-tab">
+        Upload a .json file with DocsMarshal metadata
+    </div>
+    <app-bootstrap-uploader
+        accept=".json"
+        buttonText="Upload File"
+        labelText=""
+        height="65"
+        (imported)="imported()"
+    ></app-bootstrap-uploader>
+    <div class="text">
+        or paste metadata in the area below.
+    </div>
+    <dx-text-area
+        #textArea
+        valueChangeEvent="keyup"
+        class="text-area"
+        [(value)]="importValue"
+        [height]="100"
+        placeholder="Paste metadata here"
+    >
+    </dx-text-area>
+    <app-button [disabled]="importValue.trim() === ''" (clicked)="applyClick(textArea)">Upload Metadata</app-button>
 </app-popup>

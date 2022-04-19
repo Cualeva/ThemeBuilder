@@ -16,11 +16,11 @@
     margin-top: 20px;
 }
 
-.tabs .text {
+.text {
     text-align: center;
     margin: 20px 0 10px;
 }
 
-.tabs .text.first-tab {
+.text.first-tab {
     margin-bottom: 0;
 }

@@ -12,13 +12,6 @@ export class ImportService {
     private normalizedMetadata: BuilderConfig = {};
     changed = new EventEmitter();
 
-    importBootstrapVariables(variables: string, bootstrapVersion: number, redirectView: string): Promise<void> {
-        this.clearSavedMetadata();
-        return this.metaRepository.importBootstrap(variables, bootstrapVersion).then(() => {
-            this.route.navigate([redirectView, this.metaRepository.theme.name, this.metaRepository.theme.colorScheme]);
-        });
-    }
-
     importMetadata(meta: string, redirectView: string): Promise<void> {
         this.clearSavedMetadata();
         try {

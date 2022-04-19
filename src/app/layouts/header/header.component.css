@@ -24,17 +24,26 @@
 
 .logo {
     color: #4e4e4e;
+    padding-right: 20px;
     padding-left: 20px;
     font-size: 18px;
-    width: 220px;
-    height: 40px;
+    /*width: 220px;*/
+    height: 30px;
     cursor: pointer;
 }
 
-.logo span {
-    font-family: 'OpenSansCondensedBold', 'HelveticaNeue-CondensedBold', Helvetica, 'Arial Narrow', Calibri, Arial, 'Lucida Grande', sans-serif;
-}
+    .logo * {
+        vertical-align: middle;
+    }
 
+.logo span {
+    /*color: #f05b41;*/
+    font-size: 19px;
+    margin-left: 6px;
+    line-height: 30px;
+    /*font-family: 'OpenSansCondensedBold', 'HelveticaNeue-CondensedBold', Helvetica, 'Arial Narrow', Calibri, Arial, 'Lucida Grande', sans-serif;*/
+}
+/*
 .logo span:first-child {
     color: #f05b41;
     font-size: 19px;
@@ -46,7 +55,7 @@
     margin-top: -5px;
     display: block;
 }
-
+*/
 .header .separator {
     width: 1px;
     background-color: #e3e7ea;

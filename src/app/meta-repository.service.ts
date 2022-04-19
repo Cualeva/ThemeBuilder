@@ -8,6 +8,7 @@ import { ExportedItem } from './types/exported-item';
 import { MetaItem } from './types/meta-item';
 import { Theme, ThemeConfig } from './types/theme';
 import { Metadata } from './types/metadata';
+import { GlobalVariable } from './global';
 
 @Injectable()
 export class MetadataRepositoryService {
@@ -20,7 +21,9 @@ export class MetadataRepositoryService {
     globalBuildNumber = 0;
 
     constructor(private router: Router, private themeBuilder: ThemeBuilderService, private loading: LoadingService) {
-        this.build();
+        if (GlobalVariable.isDefaultTheme == null) {
+            this.build();
+        }
 
         this.router.events.subscribe((event) => {
             if(!(event instanceof NavigationEnd)) return;
@@ -55,12 +58,12 @@ export class MetadataRepositoryService {
     }
 
     private getMetadata(): Promise<Metadata> {
-        if(this.metadata) {
+        if (this.metadata) {
             return Promise.resolve(this.metadata);
         }
 
         return this.themeBuilder.getMetadata().then((metadata) => {
-            if(!this.metadata) this.metadata = metadata;
+            if (!this.metadata) this.metadata = metadata;
             return metadata;
         });
     }
@@ -101,16 +104,13 @@ export class MetadataRepositoryService {
 
     build(bootstrapData?: string, bootstrapVersion?: number): Promise<BuilderResult> {
         this.loading.show();
-        const isFirstBootstrapBuild = bootstrapVersion !== undefined;
         const currentTheme = this.theme;
-        const buildResult = isFirstBootstrapBuild ?
-            this.themeBuilder.buildThemeBootstrap(currentTheme, bootstrapData, bootstrapVersion) :
-            this.themeBuilder.buildTheme(currentTheme, {
-                makeSwatch: false,
-                items: this.modifiedMetaCollection,
-                widgets: [],
-                noClean: true
-            });
+        const buildResult = this.themeBuilder.buildTheme(currentTheme, {
+            makeSwatch: false,
+            items: this.modifiedMetaCollection,
+            widgets: [],
+            noClean: true
+        });
 
         const savedBuildNumber = ++this.globalBuildNumber;
 
@@ -118,14 +118,6 @@ export class MetadataRepositoryService {
             this.loading.hide();
 
             if(savedBuildNumber !== this.globalBuildNumber) return;
-
-            if(isFirstBootstrapBuild) {
-                for(const dataKey in result.compiledMetadata) {
-                    if(Object.prototype.hasOwnProperty.call(result.compiledMetadata, dataKey)) {
-                        this.modifiedMetaCollection.push({ key: dataKey, value: result.compiledMetadata[dataKey] });
-                    }
-                }
-            }
 
             const itemPromises = [];
             Object.keys(result.compiledMetadata).forEach((dataKey) => {
@@ -185,13 +177,9 @@ export class MetadataRepositoryService {
         return this.build();
     }
 
-    importBootstrap(bootstrapData: string, bootstrapVersion: number): Promise<BuilderResult> {
-        this.clearModifiedDataCache();
-        this.modifiedMetaCollection = [];
-        return this.build(bootstrapData, bootstrapVersion);
-    }
-
     getVersion(): Promise<string> {
+        return Promise.resolve(GlobalVariable.version);
+        /*
         if(this.metadata) {
             return Promise.resolve(this.metadata.version);
         }
@@ -200,6 +188,7 @@ export class MetadataRepositoryService {
             if(!this.metadata) this.metadata = metadata;
             return metadata.version;
         });
+        */
     }
 
     getThemes(): Promise<ThemeConfig[]> {

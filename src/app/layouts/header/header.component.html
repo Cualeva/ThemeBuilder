@@ -1,7 +1,7 @@
 <div class="header" [ngClass]="{ 'filled': switchEnabled }">
     <div class="logo" [routerLink]="['/']">
-        <span>DevExtreme</span> ThemeBuilder
-        <span>by DevExpress</span>
+        <img src="images/logo.png" height="30" style="vertical-align: middle;"/>
+        <span>ThemeBuilder</span>
     </div>
 
     <div *ngIf="switchEnabled; then switcherBlock;"></div>
@@ -41,12 +41,16 @@
         <div class="separator"></div>
         <app-header-button text="Export" icon="export" (click)="export.popup.show();"></app-header-button>
         <div class="separator"></div>
+        <app-header-button text="Save" icon="save" (click)="export.save();"></app-header-button>
+        <div class="separator"></div>
+        <app-header-button text="Reset Theme" icon="reset" (click)="resetTheme();"></app-header-button>
+        <div class="separator"></div>
 
         <app-import-popup #import></app-import-popup>
         <app-export-popup #export></app-export-popup>
-        <div class="separator help"></div>
+        <!--<div class="separator help"></div>-->
     </ng-template>
 
-    <app-help-button></app-help-button>
+    <!--<app-help-button></app-help-button>-->
 </div>
 

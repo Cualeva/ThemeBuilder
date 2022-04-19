@@ -20,7 +20,7 @@
                         "polyfills": "src/polyfills.ts",
                         "tsConfig": "src/tsconfig.app.json",
                         "assets": [
-                            "src/favicon.ico",
+                            "src/favicon.png",
                             "src/assets",
                             "src/images",
                             {
@@ -42,7 +42,8 @@
                                 "glob": "**/*",
                                 "input": "./node_modules/devextreme/dist/css/fonts",
                                 "output": "content/css/fonts"
-                            }
+                            },
+                            "src/web.config"
                         ],
                         "styles": [
                             "src/styles.css"
