@@ -30,7 +30,7 @@ Il motivo è che il progetto sarà utilizzabile senza usare node.js come web ser
 
 Aggiunto il file web.config e la voce "src/web.config" in projects->devextreme-themebuilder-app->architect->build->assets del file "angular.json":
 questo permette la navigazione tramite gli url
-ATTENZIONE: nel webserver docsmarshal.cualeva.com la presenza di questo Web.config ha rotto tutti i siti, quindi non può essere utilizzato
+ATTENZIONE: questo Web.config potrebbe causare interazioni inaspettate sugli altri siti hostati da IIS
 Link utile: https://levelup.gitconnected.com/how-to-deploy-angular-app-to-an-iis-web-server-complete-setup-337997486423
 
 Spostato "@angular/cli": "^9.1.7", da devDependencies a dependencies nel file "package.json", questo per non obbligare ad installare angular-cli (non è più necessario utilizzare il comando npm install @angular/cli -g)

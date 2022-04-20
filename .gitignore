@@ -39,3 +39,6 @@ testem.log
 Thumbs.db
 /.vs/slnx.sqlite
 /.vs/ThemeBuilder/config/applicationhost.config
+/package-lock.json
+/.vs/VSWorkspaceState.json
+/.vs/ThemeBuilder/v16/.suo
