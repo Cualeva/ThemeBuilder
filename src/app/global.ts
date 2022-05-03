@@ -6,5 +6,7 @@ export const GlobalVariable = {
     buildCount: 0,
     version: null,
     backEndUrl: 'https://themebuilder.docsmarshal.com/Api',//'https://themebuilder.docsmarshal.com/Api', //'http://localhost:63109'4201,
-    devExpressUrl: 'https://js.devexpress.com/api/themebuilder'
+    devExpressUrl: 'https://js.devexpress.com/api/themebuilder',
+    currentVariables: null,
+    currentCss: null
 };

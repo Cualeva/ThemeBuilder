@@ -153,6 +153,8 @@ export class MetadataRepositoryService {
     }
 
     export(outColorScheme: string, swatch: boolean, widgets: string[], assetsBasePath: string, removeExternalResources: boolean): Promise<string> {
+        if (GlobalVariable.currentCss != null)
+            return Promise.resolve(GlobalVariable.currentCss);
         return new Promise((resolve, reject): void => {
             this.themeBuilder.buildTheme(this.theme, {
                 makeSwatch: swatch,

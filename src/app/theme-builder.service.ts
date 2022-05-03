@@ -21,13 +21,16 @@ export class ThemeBuilderService {
         GlobalVariable.buildCount++;
         var postBuilder: Promise<any> = this.http.post(`${GlobalVariable.backEndUrl}/ThemeBuilder/BuildTheme`, {
             version: GlobalVariable.version,
-            config: JSON.stringify(config)
+            config: JSON.stringify(config),
+            writeDebugTimeLogs: false
         }).toPromise();
         postBuilder = postBuilder.then(function (result) {
             if (result.Error == true) {
                 console.error(result.ErrorDescription);
                 throw new Error(result.ErrorDescription);
             }
+            GlobalVariable.currentVariables = result.Data.compiledMetadata;
+            GlobalVariable.currentCss = result.Data.css;
             return result.Data;
         });
         return postBuilder;
