@@ -94,6 +94,9 @@ export class MetadataRepositoryService {
                 return;
             }
 
+            if (this.modifiedMetaCollection == null) {
+                this.modifiedMetaCollection = [];
+            }
             this.modifiedMetaCollection = this.modifiedMetaCollection.filter((item) => item.key !== dataItem.Key);
 
             this.modifiedMetaCollection.push({ key: dataItem.Key, value: dataItem.Value });
@@ -175,7 +178,7 @@ export class MetadataRepositoryService {
     import(theme: Theme, modifiedData: ExportedItem[]): Promise<BuilderResult> {
         this.clearModifiedDataCache();
         this.theme = theme;
-        this.modifiedMetaCollection = modifiedData;
+        this.modifiedMetaCollection = modifiedData || [];
         return this.build();
     }
 
