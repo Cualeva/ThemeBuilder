@@ -4,8 +4,8 @@
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
-        "build": "ng build --watch --prod --baseHref=/ && node ./copyfile.js",
-        "dist": "ng build --prod --baseHref=/ && node ./copyfile.js",
+        "build": "ng build --watch --configuration production --baseHref=/ && node ./copyfile.js",
+        "dist": "ng build --configuration production --baseHref=/ && node ./copyfile.js",
         "lint-fix": "eslint --fix \"src/**/*.ts\"",
         "lint": "eslint \"src/**/*.ts\"",
         "test": "npm run lint && npm run build"
