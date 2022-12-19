@@ -26,7 +26,7 @@ export class MetadataRepositoryService {
         }
 
         this.router.events.subscribe((event) => {
-            if(!(event instanceof NavigationEnd)) return;
+            if (!(event instanceof NavigationEnd)) return;
             const urlParts = event.url.split('/');
             const MAIN_VIEW_POSITION = 1;
             const THEME_POSITION = 2;
@@ -35,12 +35,12 @@ export class MetadataRepositoryService {
             const themeName = urlParts[THEME_POSITION];
             const colorScheme = urlParts[COLOR_SCHEME_POSITION];
 
-            if(mainView === 'master' && this.modifiedMetaCollection.length) {
+            if (mainView === 'master' && this.modifiedMetaCollection.length) {
                 this.forceRebuild = true;
             }
 
-            if(themeName && colorScheme) {
-                if(this.theme.name !== themeName ||
+            if (themeName && colorScheme) {
+                if (this.theme.name !== themeName ||
                     this.theme.colorScheme !== colorScheme ||
                     this.forceRebuild
                 ) {
@@ -84,13 +84,13 @@ export class MetadataRepositoryService {
 
     updateSingleVariable(e: any, key: string): void {
         this.getDataItemByKey(key).then((dataItem) => {
-            if(dataItem.Value === e.value) {
+            if (dataItem.Value === e.value) {
                 return;
             }
 
             dataItem.Value = e.value;
 
-            if(e.previousValue === undefined) {
+            if (e.previousValue === undefined) {
                 return;
             }
 
@@ -120,18 +120,19 @@ export class MetadataRepositoryService {
         return buildResult.then((result) => {
             this.loading.hide();
 
-            if(savedBuildNumber !== this.globalBuildNumber) return;
+            if (savedBuildNumber !== this.globalBuildNumber) return;
 
             const itemPromises = [];
             Object.keys(result.compiledMetadata).forEach((dataKey) => {
-                if(Object.prototype.hasOwnProperty.call(result.compiledMetadata, dataKey)) {
+                if (Object.prototype.hasOwnProperty.call(result.compiledMetadata, dataKey)) {
                     itemPromises.push(this.getDataItemByKey(dataKey));
                 }
             });
 
             return Promise.all(itemPromises).then((resolveItems) => {
                 resolveItems.forEach((item) => {
-                    item.Value = result.compiledMetadata[item.Key];
+                    if (item != null)
+                        item.Value = result.compiledMetadata[item.Key];
                 });
 
                 this.css.next(result.css);
@@ -145,7 +146,7 @@ export class MetadataRepositoryService {
             const result: MetaItem[] = [];
             items.forEach((item) => {
                 const index = this.metadata.baseParameters.indexOf(item.Key.replace('$', '@'));
-                if(index >= 0) result[index] = item;
+                if (index >= 0) result[index] = item;
             });
             return result;
         });
@@ -197,12 +198,12 @@ export class MetadataRepositoryService {
     }
 
     getThemes(): Promise<ThemeConfig[]> {
-        if(this.metadata) {
+        if (this.metadata) {
             return Promise.resolve(this.metadata.themes);
         }
 
         return this.getMetadata().then((metadata) => {
-            if(!this.metadata) this.metadata = metadata;
+            if (!this.metadata) this.metadata = metadata;
             return metadata.themes;
         });
     }
