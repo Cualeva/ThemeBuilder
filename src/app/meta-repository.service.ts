@@ -9,6 +9,7 @@ import { MetaItem } from './types/meta-item';
 import { Theme, ThemeConfig } from './types/theme';
 import { Metadata } from './types/metadata';
 import { GlobalVariable } from './global';
+import { hexToRgba } from './color';
 
 @Injectable()
 export class MetadataRepositoryService {
@@ -132,7 +133,7 @@ export class MetadataRepositoryService {
             return Promise.all(itemPromises).then((resolveItems) => {
                 resolveItems.forEach((item) => {
                     if (item != null)
-                        item.Value = result.compiledMetadata[item.Key];
+                        item.Value = hexToRgba(result.compiledMetadata[item.Key]);
                 });
 
                 this.css.next(result.css);
