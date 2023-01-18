@@ -13,6 +13,8 @@ export class ImportMetaComponent {
     importValue = '';
 
     applyClick(t): void {
-        mutePromise(this.importService.importMetadata(t.value, 'advanced'));
+        mutePromise(this.importService.importMetadata(t.value, 'advanced').then(null, (err) => {
+            console.error(err);
+        }));
     }
 }

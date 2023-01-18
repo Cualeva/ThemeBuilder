@@ -16,35 +16,15 @@ export class ImportPopupComponent {
         private googleAnalyticsEventsService: GoogleAnalyticsEventsService
     ) { }
 
-    radioGroupData = [{
-        text: 'Bootstrap 5',
-        value: 0,
-        version: 5,
-        acceptFormat: '.scss',
-        uploadButtonText: 'Upload SCSS Variables'
-    }, {
-        text: 'Bootstrap 4',
-        value: 1,
-        version: 4,
-        acceptFormat: '.scss',
-        uploadButtonText: 'Upload SCSS Variables'
-    }, {
-        text: 'Bootstrap 3',
-        value: 2,
-        version: 3,
-        acceptFormat: '.less',
-        uploadButtonText: 'Upload LESS Variables'
-    }];
-
     selectedIndex = 0;
     importValue = '';
 
     applyClick(t): void {
-        this.googleAnalyticsEventsService.emitEvent('import', 'metadata');
-
         this.importService.importMetadata(t.value, 'advanced').then(() => {
             this.popup.hide();
             t.value = '';
+        }, (err) => {
+            console.error(err);
         });
     }
 
