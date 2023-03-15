@@ -24,7 +24,7 @@ export class AppComponent {
                     if (ev.data.language != null && ev.data.language != "") {
                         locale(ev.data.language);
                     }
-                    importService.importMetadata(JSON.stringify(JSON.parse(ev.data.metaData || "{}")), 'advanced').then(null, (das?) => {
+                    importService.importMetadata(JSON.stringify(JSON.parse(ev.data.metaData || "{ \"outputColorScheme\": \"custom\" }")), 'advanced').then(null, (das?) => {
                         console.error(das);
                         alert('Metadata has a wrong format.', 'Error');
                     });
