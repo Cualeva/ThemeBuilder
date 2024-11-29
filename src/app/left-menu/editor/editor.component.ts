@@ -18,10 +18,11 @@ export class EditorComponent {
     @Input('item') item: MetaItem;
 
     @Input() searchText = '';
+    header;
 
     constructor(private names: NamesService,
         private metaRepository: MetadataRepositoryService,
-        private analyticsEventsService: AnalyticsEventsService,
+        //private analyticsEventsService: AnalyticsEventsService,
         private router: Router
     ) { }
 
@@ -52,23 +53,27 @@ export class EditorComponent {
     }
 
     valueTextChanged(e: { value: string, component: any }, key: string): void {
+        /*
         this.analyticsEventsService.trackEvent(
             'TB: Settings',
             `Tb ${this.getSettingsName()} - ${key}`
         );
+        */
         if(this.isValueCanBePixels() && this.isPositiveNumber(e.value)) {
             e.value = e.value + 'px';
         }
 
         this.metaRepository.updateSingleVariable(e, key);
     }
-/*
+
     valueChanged(e: any, key: string): void {
+        /*
         this.analyticsEventsService.trackEvent(
             'TB: Settings',
             `Tb ${this.getSettingsName()} - ${key}`
         );
+        */
         this.metaRepository.updateSingleVariable(e, key);
     }
-*/
+
 }

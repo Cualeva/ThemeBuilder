@@ -38,13 +38,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
         // eslint-disable-next-line @typescript-eslint/no-floating-promises
         this.metadataService.getThemes().then((themes) => {
             const newTheme = themes.filter((i) => i.themeId === e.value);
-
+            let skipQuestion = GlobalVariable.isDefaultTheme === true;
+            if (this.metadataService.ignoreThemeChanged === true) {
+                this.metadataService.ignoreThemeChanged = false;
+                skipQuestion = true;
+            }
             // eslint-disable-next-line @typescript-eslint/no-floating-promises
-            if (GlobalVariable.isDefaultTheme === true)
+            if (skipQuestion === true)
                 var promise = Promise.resolve(true);
             else
-                var promise = confirm('Are you sure you want to change the base theme? All changes will be lost.', 'ThemeBuilder');
-                //var promise = confirm(GlobalVariable.translations["dm-changeBaseThemeConfirmQuestion"] || 'Are you sure you want to change the base theme? All changes will be lost.', 'ThemeBuilder');
+                var promise = confirm('Are you sure you want to change the theme? All changes will be lost.', 'ThemeBuilder');
             promise.then((confirmed) => {
                 if(confirmed && newTheme.length) {
                     const theme = newTheme[0].name;
@@ -67,7 +70,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
             var promise = Promise.resolve(true);
         else
             var promise = confirm('Are you sure you want to change the base theme? All changes will be lost.', 'ThemeBuilder');
-            //var promise = confirm(GlobalVariable.translations["dm-changeBaseThemeConfirmQuestion"] || 'Are you sure you want to change the base theme? All changes will be lost.', 'ThemeBuilder');
         promise.then(function (choice) {
             if (choice) {
                 parent.postMessage({ type: 'resetTheme', data: null }, '*');

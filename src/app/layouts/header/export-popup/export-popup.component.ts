@@ -8,7 +8,7 @@ import { ImportService } from '../../../import.service';
 import { LoadingService } from '../../../loading.service';
 import { PopupComponent } from '../popup/popup.component';
 import { DxTreeViewComponent, DxScrollViewComponent } from 'devextreme-angular';
-import { AnalyticsEventsService } from '../../../analytics-events.service';
+// import { AnalyticsEventsService } from '../../../analytics-events.service';
 
 class WidgetData {
     widget: string;
@@ -278,11 +278,13 @@ export class ExportPopupComponent implements OnInit {
     }
 
     exportZip(): void {
+        /*
         this.analyticsEventsService.trackEvent(
             'TB: Export',
             'Tb download zip',
             this.importService.getThemeName()
         );
+        */
 
         const zip = new JSZip();
         const fontExtension = ['ttf', 'woff', 'woff2'];
@@ -315,20 +317,24 @@ export class ExportPopupComponent implements OnInit {
     }
 
     copy(): void {
-        if(this.needMeta) {
+        if (this.needMeta) {
+            /*
             this.analyticsEventsService.trackEvent(
                 'TB: Export',
                 'Tb copy metadata',
                 this.importService.getThemeName()
             );
+            */
             this.exportMeta(false);
             this.copyAreaActive = true;
         } else {
+            /*
             this.analyticsEventsService.trackEvent(
                 'TB: Export',
                 'Tb copy css',
                 this.importService.getThemeName()
             );
+            */
             this.exportCss(false)
                 .then(() => this.copyAreaActive = true)
                 .catch((e) => {

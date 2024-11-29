@@ -1,10 +1,10 @@
+/*
 import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
-
 export class AnalyticsEventsService {
     trackEvent(...items): void {
         if(!environment.production) return;
@@ -17,3 +17,4 @@ export class AnalyticsEventsService {
         }
     }
 }
+*/

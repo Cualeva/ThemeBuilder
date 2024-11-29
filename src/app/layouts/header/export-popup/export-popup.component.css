@@ -79,7 +79,7 @@
 }
 
 .view-wrapper {
-    height: 468px;
+    /*height: 468px;*/
 }
 
 ::ng-deep .view-wrapper .dx-checkbox-text {
@@ -168,7 +168,7 @@
 }
 
 .view-wrapper .views-container .view .buttons-container {
-    flex-grow: 1;
+    /*flex-grow: 1;*/
     display: flex;
     justify-content: space-between;
 }
@@ -299,7 +299,8 @@
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-    padding-left: 8px;
+    padding-left: 0;
+    margin-top: 28px;
 }
 
 .view-wrapper .views-container .view .export-text {
@@ -453,3 +454,24 @@
     padding-bottom: 20px;
 }
 
+.view-wrapper .views-container .view .buttons-container .export-popup-button {
+    background-color: #fff;
+    border: 1px solid #E9E9E9;
+    box-shadow: none;
+}
+
+.view-wrapper .views-container .view .buttons-container .export-popup-button:hover {
+    background-color: #e9e9e9;
+}
+
+.view-wrapper .views-container .view .buttons-container .export-popup-button .button-text {
+    color: #596c7d;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+}
+
+.view-0 .export-text.export-text-metadata {
+    margin-bottom: 0;
+}

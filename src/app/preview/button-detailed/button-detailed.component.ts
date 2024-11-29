@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AnalyticsEventsService } from '../../../app/analytics-events.service';
+//import { AnalyticsEventsService } from '../../../app/analytics-events.service';
 
 @Component({
     selector: 'app-button-detailed',
@@ -14,7 +14,7 @@ export class ButtonDetailedComponent {
     @Output() clicked = new EventEmitter();
 
     constructor(
-        private analyticsEventsService: AnalyticsEventsService
+        //private analyticsEventsService: AnalyticsEventsService
     ) { }
 
     onClick(): void {
@@ -23,13 +23,13 @@ export class ButtonDetailedComponent {
             { widget: isClosed ? this.widget : 'base.common' },
             window.parent.location.href
         );
-
+        /*
         this.analyticsEventsService.trackEvent(
             'TB: Settings',
             'Tb ' + (isClosed ? 'open' : 'close') + ' settings',
             this.widget
         );
-
+        */
         this.clicked.emit({ isClosed });
     }
 }

@@ -20,6 +20,7 @@ export class MetadataRepositoryService {
     css = new BehaviorSubject<string>('');
     forceRebuild = false;
     globalBuildNumber = 0;
+    ignoreThemeChanged = false;
 
     constructor(private router: Router,
         private themeBuilder: ThemeBuilderService,
@@ -182,6 +183,7 @@ export class MetadataRepositoryService {
         this.clearModifiedDataCache();
         this.theme = theme;
         this.modifiedMetaCollection = modifiedData || [];
+        this.ignoreThemeChanged = true;
         return this.build();
     }
 

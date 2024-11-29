@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -7,8 +7,7 @@
     <base href="/">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" type="text/css" href="content/css/dx.common.css" />
+    <link rel="icon" type="image/ico" href="favicon.ico">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wdth,wght@75,700;100,700&amp;display=swap" rel="stylesheet" type="text/css">
@@ -18,7 +17,7 @@
             return /preview|wizard/.test(window.location.pathname);
         }
 
-        if(isIframe()) {
+        if (isIframe()) {
             var themeMarker = "dx." + /generic|material|fluent/.exec(window.location.pathname)[0];
             document.write('<style>.dx-theme-marker { font-family: "' + themeMarker + '"; }</style>');
         } else {
@@ -50,9 +49,9 @@
             margin: 0;
         }
 
-        body.hide-loading .loading {
-            display: none;
-        }
+            body.hide-loading .loading {
+                display: none;
+            }
 
         .loading {
             text-align: center;
@@ -63,17 +62,17 @@
             height: 272px;
         }
 
-        .loading img {
-            transition-property: transform;
-            backface-visibility: hidden;
-            animation: rotate 2s linear infinite;
-            transform-origin: 50% 50%;
-            will-change: transform;
-        }
+            .loading img {
+                transition-property: transform;
+                backface-visibility: hidden;
+                animation: rotate 2s linear infinite;
+                transform-origin: 50% 50%;
+                will-change: transform;
+            }
 
         @keyframes rotate {
             100% {
-                transform:rotate(-360deg);
+                transform: rotate(-360deg);
             }
         }
     </style>

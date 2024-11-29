@@ -1,10 +1,10 @@
 <app-popup
     title="Theme Import"
-    height="600px"
+    height="430px"
     #popup
 >
-    <dx-tab-panel class="tabs">
-        <dxi-item title="DocsMarshal Metadata">
+    <!--<dx-tab-panel class="tabs">
+        <dxi-item title="DocsMarshal Metadata">-->
             <div class="text first-tab">
                 Upload a .json file with DocsMarshal metadata
             </div>
@@ -29,6 +29,6 @@
             >
             </dx-text-area>
             <app-button class="upload-meta" [disabled]="importValue.trim() === ''" (clicked)="applyClick(textArea)">Upload Metadata</app-button>
-        </dxi-item>
-    </dx-tab-panel>
+        <!--</dxi-item>
+    </dx-tab-panel>-->
 </app-popup>

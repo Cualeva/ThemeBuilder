@@ -18,6 +18,9 @@
 
 .header > div {
     align-self: center;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .theme-group-header {
@@ -103,7 +106,7 @@
 }
 
 .switcher {
-    margin-left: 40px;
+    /*margin-left: 40px;*/
 }
 
 .switcher-editor {

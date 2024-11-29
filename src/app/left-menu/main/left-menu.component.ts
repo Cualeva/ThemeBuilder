@@ -10,7 +10,7 @@ import { LeftMenuItem } from '../../types/left-menu-item';
 import { MetaItem } from '../../types/meta-item';
 import { LeftMenuAlias } from '../left-menu.aliases';
 import { SafeHtml } from '@angular/platform-browser';
-import { AnalyticsEventsService } from '../../analytics-events.service';
+//import { AnalyticsEventsService } from '../../analytics-events.service';
 
 const BASE_THEMING_NAME = 'Basic Settings';
 
@@ -42,8 +42,8 @@ export class LeftMenuComponent implements OnDestroy, OnInit {
 
     constructor(private route: ActivatedRoute,
         private metaRepository: MetadataRepositoryService,
-        private names: NamesService,
-        private analyticsEventsService: AnalyticsEventsService
+        private names: NamesService//,
+        //private analyticsEventsService: AnalyticsEventsService
     ) {
         this.route.params.subscribe((params) => {
             this.widget = params['group'];
@@ -70,11 +70,13 @@ export class LeftMenuComponent implements OnDestroy, OnInit {
     }
 
     selectComponent(componentName: string): void {
+        /*
         this.analyticsEventsService.trackEvent(
             'TB: Settings',
             'Tb select subgroup',
             componentName
         );
+        */
         this.menuClosed = true;
     }
 
@@ -123,12 +125,13 @@ export class LeftMenuComponent implements OnDestroy, OnInit {
                 }
             }
         });
-
+        /*
         this.analyticsEventsService.trackEvent(
             'TB: Settings',
             'Tb search',
             keyword
         );
+        */
     }
 
     changeWidget(widget: string): void {
