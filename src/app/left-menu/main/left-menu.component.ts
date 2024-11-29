@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DxScrollViewComponent } from 'devextreme-angular';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -10,6 +10,7 @@ import { LeftMenuItem } from '../../types/left-menu-item';
 import { MetaItem } from '../../types/meta-item';
 import { LeftMenuAlias } from '../left-menu.aliases';
 import { SafeHtml } from '@angular/platform-browser';
+import { AnalyticsEventsService } from '../../analytics-events.service';
 
 const BASE_THEMING_NAME = 'Basic Settings';
 
@@ -35,11 +36,15 @@ export class LeftMenuComponent implements OnDestroy, OnInit {
     searchKeyword = '';
     workArea: LeftMenuItem;
     workAreaName = BASE_THEMING_NAME;
-    formGroup = new FormGroup({
-        formControl: new FormControl('')
+    formGroup = new UntypedFormGroup({
+        formControl: new UntypedFormControl('')
     });
 
-    constructor(private route: ActivatedRoute, private metaRepository: MetadataRepositoryService, private names: NamesService) {
+    constructor(private route: ActivatedRoute,
+        private metaRepository: MetadataRepositoryService,
+        private names: NamesService,
+        private analyticsEventsService: AnalyticsEventsService
+    ) {
         this.route.params.subscribe((params) => {
             this.widget = params['group'];
             this.changeWidget(this.widget);
@@ -62,6 +67,15 @@ export class LeftMenuComponent implements OnDestroy, OnInit {
         }
 
         e.stopPropagation();
+    }
+
+    selectComponent(componentName: string): void {
+        this.analyticsEventsService.trackEvent(
+            'TB: Settings',
+            'Tb select subgroup',
+            componentName
+        );
+        this.menuClosed = true;
     }
 
     menuSearch(): void {
@@ -109,6 +123,12 @@ export class LeftMenuComponent implements OnDestroy, OnInit {
                 }
             }
         });
+
+        this.analyticsEventsService.trackEvent(
+            'TB: Settings',
+            'Tb search',
+            keyword
+        );
     }
 
     changeWidget(widget: string): void {
@@ -185,6 +205,10 @@ export class LeftMenuComponent implements OnDestroy, OnInit {
             this.searchKeyword = data.formControl;
             this.menuSearch();
         });
+    }
+
+    fireScrollEventForClosingDropdowns() {
+        document.body.dispatchEvent(new Event('scroll'));
     }
 
     ngOnDestroy(): void {

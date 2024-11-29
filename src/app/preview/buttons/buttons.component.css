@@ -1,45 +1,38 @@
-.button-indent {
-    margin-right: 20px;
+span {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 24px;
+    opacity: 0.86;
 }
 
-.buttons {
+.btn-container {
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;
-    max-width: 700px;
-    margin: 0 auto;
+    flex-direction: column;
+    gap: 16px;
 }
 
-.buttons > div {
-    display: inline-flex;
-    flex: 1 0 100px;
-    align-items: center;
-    height: 50px;
+.btn-row {
+    display: flex;
+    gap: 40px;
 }
 
-.buttons .type {
-    font-weight: bold;
-    color: #737272;
+.btn-cell:first-child {
+    width: 10%;
+    justify-content: flex-start;
 }
 
-.buttons dx-button,
-.buttons dx-button-group {
-    margin: 0 auto;
+.btn-cell {
+    width: 30%;
+    display: flex;
+    justify-content: center;
 }
 
-:host ::ng-deep  .buttons .dx-button {
-    margin-right: 0;
+.btn-list {
+    display: flex;
+    gap: 16px;
 }
 
-.horizontal-separator {
-    max-width: 700px;
-    margin: 30px auto;
-    border-bottom: 1px solid rgba(156, 156, 156, 0.35);
-}
-
-.vertical-separator {
-    display: inline-block;
-    height: 25px;
-    vertical-align: middle;
-    margin: 0 30px;
-    border-right: 1px solid rgba(156, 156, 156, 0.35);
+.btn-container-click-disabled {
+    pointer-events: none;
 }

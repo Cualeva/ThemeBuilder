@@ -37,6 +37,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+.angular
 /.vs/slnx.sqlite
 /.vs/ThemeBuilder/config/applicationhost.config
 /package-lock.json

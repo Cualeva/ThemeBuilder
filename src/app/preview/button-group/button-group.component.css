@@ -1,0 +1,39 @@
+span {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 24px;
+    opacity: 0.86;
+}
+
+.btn-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.btn-row {
+    display: flex;
+    gap: 40px;
+}
+
+.btn-cell:first-child {
+    width: 10%;
+    justify-content: flex-start;
+}
+
+.btn-cell {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0 16px;
+}
+
+.btn-container-click-disabled {
+    pointer-events: none;
+}

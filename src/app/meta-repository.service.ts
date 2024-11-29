@@ -21,11 +21,12 @@ export class MetadataRepositoryService {
     forceRebuild = false;
     globalBuildNumber = 0;
 
-    constructor(private router: Router, private themeBuilder: ThemeBuilderService, private loading: LoadingService) {
+    constructor(private router: Router,
+        private themeBuilder: ThemeBuilderService,
+        private loading: LoadingService) {
         if (GlobalVariable.isDefaultTheme == null) {
             this.build();
         }
-
         this.router.events.subscribe((event) => {
             if (!(event instanceof NavigationEnd)) return;
             const urlParts = event.url.split('/');
