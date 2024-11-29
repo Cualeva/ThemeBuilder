@@ -9,6 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" type="text/css" href="content/css/dx.common.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wdth,wght@75,700;100,700&amp;display=swap" rel="stylesheet" type="text/css">
 
     <script>
         function isIframe() {
@@ -16,11 +19,30 @@
         }
 
         if(isIframe()) {
-            var themeMarker = "dx." + /generic|material/.exec(window.location.pathname)[0];
+            var themeMarker = "dx." + /generic|material|fluent/.exec(window.location.pathname)[0];
             document.write('<style>.dx-theme-marker { font-family: "' + themeMarker + '"; }</style>');
         } else {
-            document.write('<link rel="stylesheet" type="text/css" href="content/css/dx.light.css" />');
+            document.write('<link rel="stylesheet" type="text/css" href="content/css/dx.material.blue.light.compact.css" />');
         }
+
+        const changeMetaContent = function () {
+            const meta = document.head.querySelector('meta[name=viewport]');
+
+            const changeMeta = function (e) {
+                if (window.innerWidth <= 768) {
+                    meta.content = 'width=500, user-scalable=no';
+                } else {
+                    meta.content = 'width=device-width';
+                }
+
+                e.stopPropagation();
+            }
+
+            window.addEventListener('DOMContentLoaded', changeMeta);
+            window.addEventListener('resize', changeMeta);
+        }
+
+        changeMetaContent();
     </script>
 
     <style>
@@ -68,5 +90,15 @@
             <img src="images/loading.svg" alt="loading..." />
         </div>
     </app-root>
+
+    <!-- Matomo Tag Manager -->
+    <script>
+        var _mtm = window._mtm = window._mtm || [];
+        _mtm.push({ 'mtm.startTime': (new Date().getTime()), 'event': 'mtm.Start' });
+        var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+        g.async = true; g.src = 'https://matomo.devexpress.com/js/container_foTT0fJ8.js'; g.setAttributeNode(d.createAttribute('data-ot-ignore')); s.parentNode.insertBefore(g, s);
+    </script>
+    <!-- End Matomo Tag Manager -->
+    
 </body>
 </html>

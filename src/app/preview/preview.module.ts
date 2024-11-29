@@ -5,6 +5,7 @@ import { DevExtremeModule } from 'devextreme-angular';
 
 import { AccordionComponent } from './accordion/accordion.component';
 import { ButtonsComponent } from './buttons/buttons.component';
+import { ButtonGroupComponent } from './button-group/button-group.component';
 import { DatagridComponent } from './datatgrid/datatgrid.component';
 import { DrawerComponent } from './drawer/drawer.component';
 import { EditorsComponent } from './editors/editors.component';
@@ -19,6 +20,7 @@ import { PivotgridComponent } from './pivotgrid/pivotgrid.component';
 import { ProgressbarComponent } from './progressbar/progressbar.component';
 import { SchedulerComponent } from './scheduler/scheduler.component';
 import { ScrollviewComponent } from './scrollview/scrollview.component';
+import { SplitterComponent } from './splitter/splitter.component';
 import { SlidersComponent } from './sliders/sliders.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
@@ -38,6 +40,7 @@ import { ButtonDetailedComponent } from './button-detailed/button-detailed.compo
     declarations: [
         DatagridComponent,
         ButtonsComponent,
+        ButtonGroupComponent,
         EditorsComponent,
         FilterbuilderComponent,
         FieldSetComponent,
@@ -53,6 +56,7 @@ import { ButtonDetailedComponent } from './button-detailed/button-detailed.compo
         ProgressbarComponent,
         SchedulerComponent,
         ScrollviewComponent,
+        SplitterComponent,
         TreelistComponent,
         SlidersComponent,
         WizardComponent,
@@ -64,6 +68,7 @@ import { ButtonDetailedComponent } from './button-detailed/button-detailed.compo
     exports: [
         DatagridComponent,
         ButtonsComponent,
+        ButtonGroupComponent,
         EditorsComponent,
         FilterbuilderComponent,
         FieldSetComponent,
@@ -79,6 +84,7 @@ import { ButtonDetailedComponent } from './button-detailed/button-detailed.compo
         ProgressbarComponent,
         SchedulerComponent,
         ScrollviewComponent,
+        SplitterComponent,
         TreelistComponent,
         SlidersComponent,
         WizardComponent,

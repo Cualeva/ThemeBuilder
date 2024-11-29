@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { GoogleAnalyticsEventsService } from '../../../google-analytics-events.service';
+//import { GoogleAnalyticsEventsService } from '../../../google-analytics-events.service';
 import { ImportService } from '../../../import.service';
 import { PopupComponent } from '../popup/popup.component';
 
@@ -12,10 +12,17 @@ export class ImportPopupComponent {
     @ViewChild('popup') popup: PopupComponent;
 
     constructor(
-        private importService: ImportService,
-        private googleAnalyticsEventsService: GoogleAnalyticsEventsService
+        private importService: ImportService
     ) { }
-
+/*
+    radioGroupData = [{
+        text: 'Bootstrap 5',
+        value: 0,
+        version: 5,
+        acceptFormat: '.scss',
+        uploadButtonText: 'Upload SCSS Variables'
+    }];
+*/
     selectedIndex = 0;
     importValue = '';
 

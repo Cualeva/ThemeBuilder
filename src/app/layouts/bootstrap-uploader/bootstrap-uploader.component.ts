@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { alert } from 'devextreme/ui/dialog';
 import { NotificationsService } from 'src/app/notification.service';
 import { mutePromise } from 'src/app/promise-helper';
-import { GoogleAnalyticsEventsService } from '../../google-analytics-events.service';
+//import { GoogleAnalyticsEventsService } from '../../google-analytics-events.service';
 import { ImportService } from '../../import.service';
 
 @Component({
@@ -13,6 +13,7 @@ import { ImportService } from '../../import.service';
 export class BootstrapUploaderComponent {
     @Input() accept: string;
     @Input() buttonText: string;
+    @Input() type: string;
     @Input() version: number;
     @Input() height: number;
     @Input() labelText = 'or Drop the file here';
@@ -20,7 +21,7 @@ export class BootstrapUploaderComponent {
 
     constructor(
         private importService: ImportService,
-        private googleAnalyticsEventsService: GoogleAnalyticsEventsService,
+        //private googleAnalyticsEventsService: GoogleAnalyticsEventsService,
         private notifications: NotificationsService
     ) {}
 
@@ -37,6 +38,7 @@ export class BootstrapUploaderComponent {
                 }
 
                 const isWizard = location.pathname.startsWith('/import') || location.pathname.startsWith('/ThemeBuilder');
+
                 this.importService.importMetadata(meta, 'advanced').catch(() => {
                     const message = 'Metadata has a wrong format.';
 
@@ -46,7 +48,29 @@ export class BootstrapUploaderComponent {
                         mutePromise(alert(message, 'Error'));
                     }
                 });
+/*
+                if(this.version) {
+                    this.importService.importBootstrapVariables(meta, this.version, 'advanced').catch(() => {
+                        const message = 'ThemeBuilder couldn\'t create a theme. The file may be corrupt or have an unsupported format.';
 
+                        if(isWizard) {
+                            this.notifications.error(message);
+                        } else {
+                            mutePromise(alert(message, 'Import Error'));
+                        }
+                    });
+                } else {
+                    this.importService.importMetadata(meta, 'advanced').catch(() => {
+                        const message = 'Metadata has a wrong format.';
+
+                        if(isWizard) {
+                            this.notifications.error(message);
+                        } else {
+                            mutePromise(alert(message, 'Error'));
+                        }
+                    });
+                }
+*/
                 this.imported.emit();
                 e.component.reset();
             };
