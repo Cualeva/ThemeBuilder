@@ -1,6 +1,6 @@
 <div class="header" [ngClass]="{ 'filled': switchEnabled }">
     <div class="logo" [routerLink]="['/']">
-        <div>
+        <div *ngIf="getDevExpressVersion() == null">
             <app-icon-logo class="blue-colored"></app-icon-logo>
         </div>
         <div class="product-name">
@@ -64,10 +64,10 @@
         <div class="separator"></div>
         <app-header-button text="Export" icon="export" (click)="export.popup.show();"></app-header-button>
         <div class="separator"></div>
-        <app-header-button text="Save" icon="save" (click)="export.save();"></app-header-button>
-        <div class="separator"></div>
-        <app-header-button text="Reset Theme" icon="reset" (click)="resetTheme();"></app-header-button>
-        <div class="separator"></div>
+        <app-header-button *ngIf="getDevExpressVersion() != null" text="Save" icon="save" (click)="export.save();"></app-header-button>
+        <div class="separator" *ngIf="getDevExpressVersion() != null"></div>
+        <app-header-button *ngIf="getDevExpressVersion() != null" text="Reset Theme" icon="reset" (click)="resetTheme();"></app-header-button>
+        <div class="separator" *ngIf="getDevExpressVersion() != null"></div>
 
         <app-import-popup #import></app-import-popup>
         <app-export-popup #export></app-export-popup>

@@ -29,6 +29,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     constructor(private metadataService: MetadataRepositoryService, private route: Router) { }
 
+    getDevExpressVersion() {
+        return GlobalVariable.version;
+    }
+
     themeChanged(e): void {
         if(e.component.canceled) {
             e.component.canceled = false;
