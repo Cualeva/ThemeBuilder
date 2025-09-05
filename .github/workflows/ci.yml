@@ -31,4 +31,6 @@ jobs:
   always_job:
     name: Always run job
     runs-on: ubuntu-latest
-    run: echo "This job is used to prevent the worklfow status from showing as failed"
+    steps:
+    - name: Always run
+      run: echo "This job is used to prevent the worklfow status from showing as failed."
