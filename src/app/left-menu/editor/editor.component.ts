@@ -12,7 +12,8 @@ import { hexToRgba } from '../../color';
 @Component({
     selector: 'app-editor',
     templateUrl: './editor.component.html',
-    styleUrls: ['./editor.component.css']
+    styleUrls: ['./editor.component.css'],
+    standalone: false
 })
 export class EditorComponent {
     @Input('item') item: MetaItem;

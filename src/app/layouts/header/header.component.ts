@@ -7,7 +7,8 @@ import { MetadataRepositoryService } from '../../meta-repository.service';
 import { GlobalVariable } from '../../global';
 
 @Pipe({
-    name: 'includes'
+    name: 'includes',
+    standalone: false
 })
 export class IncludesPipe implements PipeTransform {
     transform(value: string, str: string): boolean {
@@ -19,7 +20,8 @@ export class IncludesPipe implements PipeTransform {
     selector: 'app-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.css'],
-    providers: [IncludesPipe]
+    providers: [IncludesPipe],
+    standalone: false
 })
 export class HeaderComponent implements OnInit, OnDestroy {
     @Input() switchEnabled: boolean;

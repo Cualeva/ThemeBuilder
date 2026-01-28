@@ -4,7 +4,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
     selector: 'app-button-detailed',
     templateUrl: './button-detailed.component.html',
-    styleUrls: ['./button-detailed.component.css']
+    styleUrls: ['./button-detailed.component.css'],
+    standalone: false
 })
 
 export class ButtonDetailedComponent {
