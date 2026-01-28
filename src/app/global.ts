@@ -9,5 +9,5 @@ export const GlobalVariable = {
     devExpressUrl: 'https://js.devexpress.com/api/themebuilder',
     currentVariables: null,
     currentCss: null,
-    license: 'ewogICJmb3JtYXQiOiAxLAogICJjdXN0b21lcklkIjogImE0MTZhNzRiLTJiM2QtNGMwNi1hMDhmLWU0ZDU4OTE1YWNlNiIsCiAgIm1heFZlcnNpb25BbGxvd2VkIjogMjQyCn0=.a+SSil+iN/qlh5odCcB2WLeI36GrMUJNLWPX3Ildzonu0zGobGrC3R7kxa61+nIlGfDYAIU0hDLy4ioamQtOZRfOooUC2jBJ0Raa4POXpfTRXfy946e+/8FZH5aHwcDMG4HLNA=='
+    license: 'ewogICJmb3JtYXQiOiAxLAogICJjdXN0b21lcklkIjogImE0MTZhNzRiLTJiM2QtNGMwNi1hMDhmLWU0ZDU4OTE1YWNlNiIsCiAgIm1heFZlcnNpb25BbGxvd2VkIjogMjUyCn0=.cccbrGOypqmk4tLcMdfr/IMZ58/oA5CX/x/DvOn+8Oxtm9tm1unT5U5H4XZeMMd6qUhT2FiCOBFIkEJ0YRrefIMU+MJ6WmXHUGjlgjlSFYkXw3DZqWRWiTwrgLiNWNKKqnLhAw=='
 };
