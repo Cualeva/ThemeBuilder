@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --watch --configuration production --base-href=/ && node ./copyfile.js",
+    "build": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration production --base-href=/",
     "dist": "ng build --configuration production --base-href=/ && node ./copyfile.js",
     "lint-fix": "eslint --fix \"src/**/*.ts\"",
     "lint": "eslint \"src/**/*.ts\"",

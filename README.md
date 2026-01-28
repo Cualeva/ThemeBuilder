@@ -24,9 +24,7 @@ Go to http://localhost:4200/.
 NOTE: The ThemeBuilder UI creates themes for the latest minor DevExtreme version. If you want to create a theme for a specific version, use the [ThemeBuilder CLI](https://js.devexpress.com/Documentation/Guide/Common/DevExtreme_CLI/#ThemeBuilder).
 
 ## NOTE CUALEVA
-Aggiunto "--watch" nel comando scripts->build del file "package.json":
-questo permette ad IIS di runnare il progetto buildato senza dover startare la build tramite command line (http-server -p <porta> <path>)
-Il motivo è che il progetto sarà utilizzabile senza usare node.js come web server, ma il progetto intero verrà servito al client come un sito statico.
+Il progetto sarà utilizzabile senza usare node.js come web server, ma il progetto intero verrà servito al client come un sito statico.
 
 Aggiunto il file web.config e la voce "src/web.config" in projects->devextreme-themebuilder-app->architect->build->assets del file "angular.json":
 questo permette la navigazione tramite gli url
@@ -38,7 +36,7 @@ Spostato "@angular/cli": "^9.1.7", da devDependencies a dependencies nel file "p
 Per la pubblicazione è necessario:
     - aprire il command prompt
     - spostarsi nella cartella del progetto
+    - eseguire il comando "npm install"
     - eseguire il comando "npm run build":
-        quando il comando termina, node.js rimane "in ascolto" e il processo va killato...
         al termine verrà creata la cartella "dist" nel progetto
     - prendere il contenuto di "dist" e pubblicarlo in IIS come sito statico
